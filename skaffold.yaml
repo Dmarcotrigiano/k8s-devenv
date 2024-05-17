@@ -1,0 +1,37 @@
+apiVersion: skaffold/v4beta9
+kind: Config
+metadata:
+  name: local-dev
+build:
+  local:
+    concurrency: 0
+  artifacts:
+    - image: example
+      context: .
+      ko:
+        dependencies:
+          paths:
+            - ./apps/example/**/**.go # Trigger a rebuild if any go file in the example app changes.
+            - ./apps/example/**/**.mod # Trigger a rebuild if any go.mod file in the example app changes.
+            - ./lib/go/**/**.go # Trigger a rebuild if any go file in the lib package changes, this can be fine tuned to only rebuild if a dependency changes. TODO
+        main: ./apps/example/cmd/server # The main package to build.
+    - image: example-2
+      context: .
+      ko:
+        dependencies:
+          paths:
+            - ./apps/example-2/**/**.go
+            - ./apps/example-2/**/**.mod
+            - ./lib/go/**/**.go
+        main: ./apps/example-2/cmd/server
+deploy:
+  helm:
+    releases:
+      - name: local
+        namespace: default
+        createNamespace: true
+        chartPath: infra/k8s/apps
+        valuesFiles:
+          - infra/kubernetes/apps/values.yaml
+        setValueTemplates:
+          helm.value: "{{.ENV_FROM_HOST}}"
