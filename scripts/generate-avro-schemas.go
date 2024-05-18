@@ -20,7 +20,7 @@ func main() {
 		if filepath.Ext(file.Name()) == ".avsc" {
 			fmt.Println("Generating struct for:", file.Name())
 			outFileName := file.Name()[:len(file.Name())-5] + ".go" // Remove .avsc and add .go
-			cmd := exec.Command("avrogen", "-pkg", "avro", "-o", filepath.Join(schemaDir, outFileName), "-tags", "json:camel", filepath.Join(schemaDir, file.Name()))
+			cmd := exec.Command("avrogen", "-pkg", "topics", "-encoders", "-o", filepath.Join(schemaDir, outFileName), "-tags", "json:camel", filepath.Join(schemaDir, file.Name()))
 			cmd.Stdout = os.Stdout
 			cmd.Stderr = os.Stderr
 			err := cmd.Run()
