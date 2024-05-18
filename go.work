@@ -1,3 +1,7 @@
 go 1.22
 
-use ./apps/example
+use (
+	./apps/example
+	./apps/example-2
+	./lib/go/kafka
+)
