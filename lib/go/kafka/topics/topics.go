@@ -19,6 +19,6 @@ func (kt KafkaTopic) String() string {
 	return [...]string{"example-topic-one", "example-topic-two"}[kt]
 }
 
-func (kt KafkaTopic) Struct() interface{} {
+func (kt KafkaTopic) Struct() GeneratedStruct {
 	return [...]GeneratedStruct{&ExampleTopicOne{}, &ExampleTopic2{}}[kt]
 }
