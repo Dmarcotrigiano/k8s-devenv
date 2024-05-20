@@ -6,7 +6,7 @@ build:
   local:
     concurrency: 0
   artifacts:
-    - image: example
+    - image: example-1
       context: .
       ko:
         dependencies:
@@ -27,11 +27,11 @@ build:
 deploy:
   helm:
     releases:
-      - name: local
+      - name: apps
         namespace: default
         createNamespace: true
         chartPath: infra/k8s/apps
         valuesFiles:
-          - infra/kubernetes/apps/values.yaml
+          - infra/k8s/apps/values.yaml
         setValueTemplates:
-          helm.value: "{{.ENV_FROM_HOST}}"
+          scylla.host: "{{.SCYLLA_HOST}}"

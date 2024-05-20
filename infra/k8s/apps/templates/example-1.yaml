@@ -1,0 +1,43 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: example-1
+  labels:
+    app: example-1
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: example-1
+  template:
+    metadata:
+      labels:
+        app: example-1
+    spec:
+      containers:
+      - name: example-1
+        image: example-1:latest
+        ports:
+        - containerPort: 8080
+        envFrom:
+        - configMapRef:
+            name: example-config
+        env:
+        - name: DEBUG
+          value: {{ .Values.debug.example1 | quote }}
+        - name: SCYLLA_KEYSPACE
+          value: {{ .Values.scylla.keyspace.example | quote }}
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: example-1
+  labels:
+    app: example-1
+spec:
+  type: ClusterIP
+  ports:
+  - port: 8080
+    targetPort: 8080
+  selector:
+    app: example-1

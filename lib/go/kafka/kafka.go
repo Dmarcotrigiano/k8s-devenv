@@ -83,7 +83,7 @@ func (k *Kafka) ProduceAvroMessage(ctx context.Context, topic topics.KafkaTopic,
 		Topic: topic.String(),
 		Value: bytes,
 	}
-	k.Logger.Debug("Producing message", "topic", topic, "data", data, "Bytes", bytes, "Record", record)
+	k.Logger.Debug("Producing message", "topic", topic, "data", data, "length", len(bytes), "record", record, "bytes", bytes)
 	if err := k.Client.ProduceSync(ctx, record).FirstErr(); err != nil {
 		k.Logger.Debug("Error producing message", "error", err)
 		return fmt.Errorf("error producing message: %w", err)
@@ -108,7 +108,7 @@ func (k *Kafka) ProduceAvroMessages(ctx context.Context, topic topics.KafkaTopic
 				Topic: topic.String(),
 				Value: bytes,
 			}
-			k.Logger.Debug("Producing message", "topic", topic, "data", d, "Bytes", bytes, "Record", record)
+			k.Logger.Debug("Producing message", "topic", topic, "data", d, "length", len(bytes), "record", record, "bytes", bytes)
 			k.Client.Produce(ctx, record, func(_ *kgo.Record, err error) {
 				if err != nil {
 					k.Logger.Error("record had a produce error", "error", err)

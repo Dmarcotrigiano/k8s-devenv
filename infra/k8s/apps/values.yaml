@@ -1,0 +1,7 @@
+debug:
+  example1: true
+  example2: true
+scylla:
+  # host: # Using environment variable for host to template in configmap
+  keyspace:
+    example: "example_keyspace"

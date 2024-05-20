@@ -1,0 +1,33 @@
+apiVersion: v2
+name: local-infra
+version: 0.1.0
+dependencies:
+  - name: scylla
+    repository: "scylla/scylla"
+    condition: scylla.enabled
+  - name: scylla-operator
+    repository: "scylla/scylla-operator"
+    condition: scylla.enabled
+  - name: scylla-manager
+    repository: "scylla/scylla-manager"
+    condition: scylla.enabled
+  - name: kafka
+    repository: "oci://registry-1.docker.io/bitnamicharts/kafka"
+    condition: kafka.enabled
+  - name: kafka-ui
+    repository: "kafka-ui/kafka-ui"
+    condition: kafka-ui.enabled
+  - name: kafka-schema
+    repository: "oci://registry-1.docker.io/bitnamicharts/schema-registry"
+    condition: kafka-schema.enabled
+  - name: prometheus
+    repository: "prometheus-community/kube-prometheus-stack"
+    condition: prometheus.enabled
+  - name: cert-manager
+    repository: "https://charts.jetstack.io"
+    version: "v1.6.1"
+    condition: cert-manager.enabled
+  - name: redpanda
+    repository: "oci://registry-1.docker.io/redpanda/redpanda"
+    version: "v21.11.1"
+    condition: redpanda.enabled

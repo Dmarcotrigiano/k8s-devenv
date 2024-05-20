@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: example-config
+  labels:
+    app: example-1
+data:
+  SCYLLA_KEYSPACE: "example_keyspace"
+  KAFKA_BROKER_URL: "kafka-broker-url"
+  
