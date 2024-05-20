@@ -6,6 +6,8 @@ toolchain go1.22.2
 
 require (
 	github.com/gocql/gocql v1.6.0
+	github.com/google/uuid v1.3.0
+	github.com/scylladb/gocqlx v1.5.0
 	github.com/scylladb/gocqlx/v2 v2.8.0
 	k8s.io/client-go v0.30.1
 )
@@ -22,7 +24,6 @@ require (
 	github.com/golang/snappy v0.0.4 // indirect
 	github.com/google/gnostic-models v0.6.8 // indirect
 	github.com/google/gofuzz v1.2.0 // indirect
-	github.com/google/uuid v1.3.0 // indirect
 	github.com/hailocab/go-hostpool v0.0.0-20160125115350-e80d13ce29ed // indirect
 	github.com/imdario/mergo v0.3.6 // indirect
 	github.com/josharian/intern v1.0.0 // indirect
