@@ -9,6 +9,7 @@ lib/go/kafka/topics/*.go
 
 # dependencies
 node_modules
+infra/k8s/local/charts
 
 # IDEs and editors
 /.idea

@@ -1,0 +1,20 @@
+cert-manager:
+  enabled: true
+
+scylla:
+  enabled: true
+
+kafka:
+  enabled: false
+
+kafka-ui:
+  enabled: false
+
+kafka-schema:
+  enabled: false
+
+prometheus:
+  enabled: true
+
+redpanda:
+  enabled: true
