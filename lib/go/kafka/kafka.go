@@ -102,7 +102,6 @@ func (k *Kafka) ProduceAvroMessages(ctx context.Context, topic topics.KafkaTopic
 			bytes, err := avro.Marshal(schema, d)
 			if err != nil {
 				k.Logger.Debug("Error marshalling data", "topic", topic.String(), "data", d, "error", err)
-				fmt.Printf("error marshalling data: %v\n", err)
 				return
 			}
 			record := &kgo.Record{
@@ -110,10 +109,11 @@ func (k *Kafka) ProduceAvroMessages(ctx context.Context, topic topics.KafkaTopic
 				Value: bytes,
 			}
 			k.Logger.Debug("Producing message", "topic", topic, "data", d, "Bytes", bytes, "Record", record)
-			if err := k.Client.ProduceSync(ctx, record).FirstErr(); err != nil {
-				k.Logger.Debug("Error producing message", "error", err)
-				fmt.Printf("error producing message: %v", err)
-			}
+			k.Client.Produce(ctx, record, func(_ *kgo.Record, err error) {
+				if err != nil {
+					k.Logger.Error("record had a produce error", "error", err)
+				}
+			})
 		}(d)
 	}
 	wg.Wait()
