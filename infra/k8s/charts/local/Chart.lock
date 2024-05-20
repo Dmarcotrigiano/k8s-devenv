@@ -1,7 +1,4 @@
 dependencies:
-- name: cert-manager
-  repository: https://charts.jetstack.io
-  version: v1.6.1
 - name: scylla
   repository: https://scylla-operator-charts.storage.googleapis.com/stable
   version: v1.12.1
@@ -11,20 +8,11 @@ dependencies:
 - name: scylla-manager
   repository: https://scylla-operator-charts.storage.googleapis.com/stable
   version: v1.12.1
-- name: kafka
-  repository: oci://registry-1.docker.io/bitnamicharts
-  version: 28.2.5
-- name: kafka-ui
-  repository: https://provectus.github.io/kafka-ui-charts
-  version: 0.7.6
-- name: schema-registry
-  repository: oci://registry-1.docker.io/bitnamicharts
-  version: 18.0.6
 - name: kube-prometheus-stack
   repository: https://prometheus-community.github.io/helm-charts
   version: 58.6.0
 - name: operator
   repository: https://charts.redpanda.com
   version: 0.4.23
-digest: sha256:dc4cd61c616ddeb328f77acdc4fd2a3f22919108b45c45d03cb5496c220a40e2
-generated: "2024-05-20T15:03:37.618021156-04:00"
+digest: sha256:c96a50decfa1f6165acec15e0c26691c246f219716dfe75f0bb616fa0f474420
+generated: "2024-05-20T16:10:01.49405795-04:00"

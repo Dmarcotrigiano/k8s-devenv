@@ -44,5 +44,37 @@ This is a Nx monorepo intended to be used to collocate Go microservices and Kube
         timeout 5
         EOF'
     ```
-10. Install the local helm chart which provisions kubernetes resources that are intended to be long-running and not shut down when skaffold is interrupted.
+10. Install cert-manager:
+    ```bash
+        helm repo add jetstack https://charts.jetstack.io
+        helm repo update
+        helm install cert-manager jetstack/cert-manager \
+        --set installCRDs=true \
+        --namespace cert-manager  \
+        --create-namespace
+    ```
+11. Create necessary namespaces:
+    ```bash
+        kubectl create namespace scylla-operator
+        kubectl create namespace scylla-manager
+    ```
+12. Add the helm repos required for the local infra.
+    ```bash
+        helm repo add scylla https://scylla-operator-charts.storage.googleapis.com/stable
+        helm repo add prometheus-community https://prometheus-community.github.io/helm-charts
+        helm repo add redpanda https://charts.redpanda.com
+        helm repo update
+    ```
+13. Build the dependency charts
+    ```bash
+        helm dependency build ./infra/k8s/charts/local
+    ```
+14. Install required CRDs
+    ```bash
+        # Required for RedPanda
+        kubectl kustomize "https://github.com/redpanda-data/redpanda-operator//src/go/k8s/config/crd?ref=v2.1.20-24.1.2" \
+        | kubectl apply --server-side -f -
+    ```
+15. Install the local-infra helm chart which provisions kubernetes resources that are intended to be long-running and not shut down when skaffold is interrupted.
+    
 

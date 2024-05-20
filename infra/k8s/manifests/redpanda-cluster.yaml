@@ -1,0 +1,14 @@
+apiVersion: cluster.redpanda.com/v1alpha1
+kind: Redpanda
+metadata:
+  name: redpanda
+spec:
+  chartRef:
+    chartVersion: 5.8.5
+  clusterSpec:
+    external:
+      domain: customredpandadomain.test
+    statefulset:
+      initContainers:
+        setDataDirOwnership:
+          enabled: true

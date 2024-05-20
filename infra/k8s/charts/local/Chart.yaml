@@ -1,0 +1,21 @@
+apiVersion: v2
+name: local-infra
+version: 0.1.0
+dependencies:
+  - name: scylla-operator
+    repository: "https://scylla-operator-charts.storage.googleapis.com/stable"
+    version: "1.12.1"
+    condition: scylla.enabled
+  - name: scylla-manager
+    repository: "https://scylla-operator-charts.storage.googleapis.com/stable"
+    version: "1.12.1"
+    condition: scylla.enabled
+  - name: kube-prometheus-stack
+    repository: "https://prometheus-community.github.io/helm-charts"
+    version: "58.6.0"
+    condition: prometheus.enabled
+  - name: operator
+    alias: redpanda-operator
+    repository: "https://charts.redpanda.com"
+    version: "0.4.23"
+    condition: redpanda.enabled
