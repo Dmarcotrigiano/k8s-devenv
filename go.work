@@ -1,7 +1,11 @@
-go 1.22
+go 1.22.0
+
+toolchain go1.22.2
 
 use (
 	./apps/example
 	./apps/example-2
 	./lib/go/kafka
+	./lib/go/kubernetes
+	./lib/go/scylla
 )

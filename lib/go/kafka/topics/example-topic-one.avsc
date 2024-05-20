@@ -1,0 +1,15 @@
+{
+    "type": "record",
+    "name": "example_topicONE",
+    "namespace": "org.example.avro",
+    "fields": [
+        {
+            "name": "a",
+            "type": "long"
+        },
+        {
+            "name": "b",
+            "type": "string"
+        }
+    ]
+}

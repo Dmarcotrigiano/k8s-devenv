@@ -2,7 +2,9 @@
   "name": "@k8s-devenv/source",
   "version": "0.0.0",
   "license": "MIT",
-  "scripts": {},
+  "scripts": {
+    "gen-avro": "go run ./scripts/generate-avro-schemas.go"
+  },
   "private": true,
   "dependencies": {
     "@nx-go/nx-go": "3.0.0"
